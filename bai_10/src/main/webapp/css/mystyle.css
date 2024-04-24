@@ -1,0 +1,40 @@
+@charset "UTF-8";
+a{
+	font-weight: bold;
+	font-size: 30;
+	color: red;
+	font-family: sans-serif;
+}
+
+#indam{
+	font-weight: bold;
+	color: gray;
+	font-size:20;
+}
+
+.innghieng{
+	font-style: italic;
+	font-size: 20;
+}
+
+h1{
+	color:white;
+}
+h1{
+	font-weight: bold;
+}
+h1{
+	background: navy;
+}
+h2,h3,h4{
+	background-color: pink;
+}
+
+/*nhung phan tu h1 thuoc lop mau do*/
+h1.maudo{
+	color: red;
+}
+
+
+
+

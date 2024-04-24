@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+function checkInvaLid(){
+	let quantity = document.getElementById("quantity");
+	if(parseInt(quantity) < 1){
+		alert("Quantity must be positive");
+	}
+}

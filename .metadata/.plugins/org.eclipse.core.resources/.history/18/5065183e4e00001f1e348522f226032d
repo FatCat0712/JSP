@@ -1,0 +1,6 @@
+/**
+ * 
+ */
+function checkInvaLid(){
+	var quantity = document.getElementById("quantity");
+}

@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Purchase confirm</h1>
+	<%
+		String customerName = request.getParameter("name");
+	
+		String email = request.getParameter("email");
+		
+		String productName = request.getParameter("productName");
+		
+		String quantity = request.getParameter("quantity");
+		int quant = Integer.parseInt(quantity, 0, quantity.length()-1, 10);
+		
+	%>
+	<pre>
+	 	Thanks <%= customerName %> for booking <%= quantity %> <%= productName %>
+	 	Your total is <%= quant * 5 %>. Please pay through you email <%=email %>
+	</pre>
+</body>
+</html>

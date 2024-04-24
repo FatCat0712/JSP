@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Purchase confirm</h1>
+	<%
+		String customerName = request.getParameter("name");
+	
+		String email = request.getParameter("email");
+		
+		String productName = request.getParameter("productName");
+		
+		String quantity = request.getParameter("quantity");
+		int totalPrice = Integer.parseInt(, beginIndex, endIndex, radix);
+	%>
+</body>
+</html>

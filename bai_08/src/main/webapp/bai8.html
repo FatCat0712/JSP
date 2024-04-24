@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registration Form</title>
+<style type="text/css">
+	h2{
+		background-color: lightblue;
+	}
+	table{
+		border: outset 5px black;
+	}
+	#submitButton{
+		font-weight: bold;
+		margin-left: 50px;
+		margin-top: 10px;
+		font-size:15px;
+	}
+	#resetButton{
+		font-weight: bold;
+		margin-left: 100px;
+		font-size:15px;
+	}
+</style>
+
+</head>
+<body>
+
+	<h2>Bài 6: Viết chương trình thay đổi nội dung của select mục Quận Huyện khi người dùng thay đổi select mục Tỉnh Thành</h2>
+	<form>
+	
+	<table>
+		<tbody>
+			<tr>
+				<td colspan="2" align="left"><h2>LOGIN INFORMATION</h2></td>
+			</tr>
+			<tr>
+			  <td>Email: </td>
+			  <td><input type="email" name="Email" id="idEmail"></td>
+			</tr>
+			<tr>
+				<td>Password: </td>
+				<td><input type="password" name="Password" id="idPassword"/></td>
+			</tr>
+			<tr>
+				<td>Retype password: </td>
+				<td><input type="password" name="RetypePassword" id="idRetypePassword"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="left"><h2>PERSONAL INFORMATION</h2></td>
+			</tr>
+			<tr>
+				<td>*Full Name</td>
+				<td><input type="text" name="Name" id= "idName" required/></td>
+			</tr>
+			<tr>
+				<td>Sex</td>
+				<td>
+					<input type="radio" name="radioButtonSex" id="idRadioButtonM"/>
+					<label for="idRadioButtonM">Male</label>
+					<input type="radio" name="radioButtonSex" id="idRadioButtonF"/>
+					<label for="idRadioButtonF">Female</label>
+				</td>
+			</tr>
+			<tr>
+				<td>Date of birth</td>
+				<td>
+				<input type="date" name="dateOfBirth" id="idDateOfBirth"/>
+				</td>
+			</tr>
+			<tr>
+				<td>*Telephone Number</td>
+				<td>
+					<input type="tel" name="telephoneNumber" id="idTelephoneNumber" required/>
+				</td>
+			</tr>		
+			<tr>
+				<td colspan="2"><h2>Address</h2></td>
+			</tr>
+			<tr>
+				<td>City</td>
+				<td>
+					<select name="cities" id="cities" onload="changeDistrict()" onchange="changeDistrict()" >
+						<option value="TPHCM">TP Ho Chi Minh</option>
+						<option value="HN">Ha Noi</option>
+						<option value="DN">Da Nang</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>District</td>
+				<td>
+					<select name="districts">
+						<option value="none" hidden>Select a district</option>
+					
+						<optgroup label="HCMdist">
+							<option value="dist1">Quan 1</option>
+							<option value="dist2">Quan 2</option>
+							<option value="dist3">Quan 3</option>
+						</optgroup>
+						
+						<optgroup label="HNdist">
+							<option value="tc">Thanh Chuong</option>
+							<option value="bd">Ba Dinh</option>
+							<option value="tk">Thanh Khe</option>
+						</optgroup>
+						
+						<optgroup label="DNdist">
+							<option value="st">Son Tra</option>
+							<option value="cl">Cam Le</option>
+							<option value="tk">Thanh Khe</option>
+						</optgroup>
+						
+					</select>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>Home address</td>
+				<td><textarea row="10" col="10"></textarea></td>
+			</tr>
+			
+			<tr>
+				<td>Hobby</td>
+				<td>
+					<input type="checkbox" name="hobbyCheckBox" id="idReadBook">
+					<label for="idreadBook">Read Book</label>
+					
+					<input type="checkbox" name="hobbyCheckBox" id="idWatchMovie">
+					<label for="idWatchMovie">Watch Movie</label>
+					<br/>
+					<input type="checkbox" name="hobbyCheckBox" id="idDance">
+					<label for="idDance">Dance</label>
+					
+					<input type="checkbox" name="hobbyCheckBox" id="idSing">
+					<label for="idSing">Sing</label>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Image</td>
+				<td>
+					<input type="file" name="imageFile" id="idImageFile">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Age</td>
+				<td>
+					<input type="number" min="0">
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+				
+					
+						<input type="submit" value="Submit" id="submitButton">
+						<input type="reset" value="Reset" id="resetButton">
+					
+					
+					
+				</td>
+				
+					
+					
+				
+				
+			</tr>
+		</tbody>
+		
+		
+	</table>
+	
+	</form>
+	<script src="bai8.js"></script>
+</body>
+</html>

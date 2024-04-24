@@ -1,0 +1,31 @@
+/**
+ * 
+ */
+
+ function checkValid(){
+	
+	let productId = document.getElementById("productid").value;
+	let sellingPrice = document.getElementById("sellingprice").value;
+	let purchasePrice = document.getElementById("purchaseprice").value;
+	
+	
+	if(productId.length == 0){
+		let error_productid = document.getElementById("error_productid");
+		error_productid.innerHTML = "<span class='note'>Please enter the product id</span>"
+		
+	}
+	if(sellingPrice <= 0){
+		let error_sellingprice = document.getElementById("error_sellingprice");
+		error_sellingprice.innerHTML = "<span class='note'>Please enter a selling price</span>";
+	}
+	if(error.length > 0){
+		alert(error);
+		return;
+	}
+	else{
+		//Submit form
+		let saveform = document.getElementById("saveform");
+		saveform.submit();
+	}
+	
+ }

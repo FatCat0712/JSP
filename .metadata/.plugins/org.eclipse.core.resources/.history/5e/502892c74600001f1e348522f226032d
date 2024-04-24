@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="trangDatHang.jsp" method="post">
+	<table>
+		<tr>
+			<td colspan="2" style="background-color: lightblue; text-align: center">
+				<h2 style="margin-bottom: 15px">Purchase Order</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>Customer Name : </label>
+			</td>
+			<td>
+				<input type="text" name="name"/>
+			</td>
+		</tr>
+	</table>
+</form>
+	
+</body>
+</html>

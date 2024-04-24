@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+	<h2>Bài 1: Tạo một input-text, khi người dùng nhập tên, trang web
+		sẽ hiển thị nội dung: "Xin chào " + tên đã nhập.</h2>
+
+	<table>
+		<tr>
+			<td>Your Name:</td>
+			<td><input type="text" id="name" style="margin-left: 20px" onchange="displayName()" onkeypress="displayName()"/></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<p id="output" >Xin chào</p>
+			</td>
+		</tr>
+	</table>
+	<script src="script/bai1.js"></script>
+</body>
+</html>
