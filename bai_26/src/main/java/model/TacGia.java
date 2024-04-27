@@ -50,6 +50,8 @@ public class TacGia {
 	public void setTieuSu(String tieuSu) {
 		this.tieuSu = tieuSu;
 	}
+
+	
 	
 	
 	
