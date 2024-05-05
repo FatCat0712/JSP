@@ -1,5 +1,6 @@
 package main;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -8,6 +9,7 @@ import dao.KhachHangDAO;
 import dao.SachDAO;
 import dao.TacGiaDAO;
 import dao.TheLoaiDAO;
+import database.JDBCUtil;
 import model.DonHang;
 import model.KhachHang;
 import model.Sach;
@@ -16,10 +18,10 @@ import model.TheLoai;
 
 public class Test {
 	public static void main(String[] args) {
-		ArrayList<DonHang> data = DonHangDAO.getInstance().selectAll();
-		for(DonHang tg : data) {
-			System.out.println(tg);
-		}
+//		ArrayList<DonHang> data = DonHangDAO.getInstance().selectAll();
+//		for(DonHang tg : data) {
+//			System.out.println(tg);
+//		}
 		
 //		Sach tl = SachDAO.getInstance().selectById("SP1");
 //		System.out.println(tl);
@@ -41,7 +43,9 @@ public class Test {
 //	    Sach s = new Sach("SP6","Doraemon",new TacGia("TG4","",null,""),2024,200000,150000,230000,10,new TheLoai("TT",""),"Tiếng Việt","Dành cho trẻ em");
 //		SachDAO.getInstance().update(s);
 		
-		
+		Connection c = JDBCUtil.connect();
+		JDBCUtil.printInfo(c);
+		JDBCUtil.disconnect(c);
 		
 	}
 }
