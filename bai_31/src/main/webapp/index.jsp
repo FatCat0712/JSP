@@ -55,12 +55,9 @@
 	                        <li><a href="#">Thông báo</a></li>
 	                        <li><a href="changeinfo.jsp">Thay đổi thông tin</a></li>
 	                        <li><a href="changepass.jsp">Đổi mật khẩu</a></li>
-	                        
-	                        <li>
-	                        	<form action="logout" method="post" style="padding: 10px 0px 10px 20px;">
-									<input type="submit" value="Đăng xuất" style="font-weight: bold; font-size:15px" name="logout" >
-								</form>
-	                        </li>
+	                        <li><hr class="dropdown-divider"></li>
+		                    <li><a href="logout">Đăng xuất</a></li>
+	                      
 	                    </ul>
                	 	</li>		
                 	<%
