@@ -1,0 +1,344 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import database.JDBCUtil;
+import model.KhachHang;
+
+public class KhachHangDAO implements DAO<KhachHang>{
+	public static KhachHangDAO getInstance() {
+		return new KhachHangDAO();
+	}
+	@Override
+	public ArrayList<KhachHang> selectAll() {
+		ArrayList<KhachHang> khachHangList = new ArrayList<KhachHang>();
+		Connection c = JDBCUtil.connect();
+		try {
+			String sql = "SELECT * FROM khachhang";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				String maKhachHang = rs.getString("makhachhang");
+				String tenDangNhap = rs.getString("tendangnhap");
+				String matKhau = rs.getString("matkhau");
+				String hoTen = rs.getString("hoten");
+				String diaChi = rs.getString("diachi");
+				String diaChiMuaHang = rs.getString("diachimuahang");
+				String diaChiNhanHang = rs.getString("diachinhanhang");
+				Date ngaySinh = rs.getDate("ngaysinh");
+				String soDienThoai = rs.getString("sodienthoai");
+				String email = rs.getString("email");
+				String gioiTinh = rs.getString("gioitinh");
+				int nhan = rs.getInt("nhanbantin");
+				boolean nhanBanTin = false;
+				if(nhan == 1) {
+					nhanBanTin = true;
+				}
+				
+				khachHangList.add(new KhachHang(maKhachHang, tenDangNhap, matKhau, hoTen, diaChi, diaChiMuaHang, diaChiNhanHang, ngaySinh, soDienThoai,email, gioiTinh, nhanBanTin));
+			}
+			JDBCUtil.disconnect(c);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return khachHangList;
+	}
+
+	@Override
+	public KhachHang selectById(String object) {
+		KhachHang target = null;
+		Connection c = JDBCUtil.connect();
+		try {
+			String sql = "SELECT * FROM khachhang WHERE makhachhang=?";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setString(1, object);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				String maKhachHang = rs.getString("makhachhang");
+				String tenDangNhap = rs.getString("tendangnhap");
+				String matKhau = rs.getString("matkhau");
+				String hoTen = rs.getString("hoten");
+				String diaChi = rs.getString("diachi");
+				String diaChiMuaHang = rs.getString("diachimuahang");
+				String diaChiNhanHang = rs.getString("diachinhanhang");
+				Date ngaySinh = rs.getDate("ngaysinh");
+				String soDienThoai = rs.getString("sodienthoai");
+				String email = rs.getString("email");
+				String gioiTinh = rs.getString("gioitinh");
+				
+				int nhan = rs.getInt("nhanbantin");
+				boolean nhanBanTin = false;
+				if(nhan == 1) {
+					nhanBanTin = true;
+				}
+				
+				String maXacThuc = rs.getString("maxacthuc");
+				Date thoiGianHieuLuc = rs.getDate("thoigianhieuluc");
+				int trangThaiXacThuc = rs.getInt("trangthaixacthuc");
+				
+				
+				
+				target = new KhachHang(maKhachHang, tenDangNhap, matKhau, hoTen, diaChi, diaChiMuaHang, diaChiNhanHang, ngaySinh, soDienThoai,email, gioiTinh, nhanBanTin,maXacThuc,thoiGianHieuLuc,trangThaiXacThuc);
+			}
+			JDBCUtil.disconnect(c);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return target;
+	}
+
+	@Override
+	public boolean insert(KhachHang object) {
+		KhachHang target = selectById(object.getMaKhachHang());
+		boolean status = false;
+		if(target != null)
+			return false;
+		Connection c = JDBCUtil.connect();
+		try {
+			
+			String sql = "INSERT INTO khachhang VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			PreparedStatement pst = c.prepareStatement(sql);
+			
+			pst.setString(1, object.getMaKhachHang());
+			pst.setString(2, object.getTenDangNhap());
+			pst.setString(3, object.getMatKhau());
+			pst.setString(4, object.getHoTen());
+			pst.setString(5, object.getDiaChi());
+			pst.setString(6, object.getDiaChiMuaHang());
+			pst.setString(7, object.getDiaChiNhanHang());
+			pst.setDate(8, object.getNgaySinh());
+			pst.setString(9, object.getSoDienThoai());
+			pst.setString(10,object.getEmail());
+			pst.setString(11,object.getGioiTinh());
+			if(object.isNhanBanTin()==true) {
+				pst.setInt(12, 1);
+			}
+			else {
+				pst.setInt(12, 0);
+			}
+			pst.setString(13, object.getMaXacThuc());
+			pst.setDate(14, object.getThoiGianHieuLuc());
+			pst.setInt(15,object.getTrangThaiXacThuc());
+			
+			int result = pst.executeUpdate();
+			JDBCUtil.disconnect(c);
+			if(result > 0) {
+				System.out.println("Insert successfully");
+				status = true;
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
+
+	@Override
+	public boolean insertAll(ArrayList<KhachHang> object) {
+		int dem = 0;
+		for(KhachHang kh : object) {
+	    	 insert(kh);
+	    	 ++dem;
+	     }
+		
+		if(dem == object.size()) {
+			System.out.println("Insert all successfully");
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean delete(KhachHang object) {
+		KhachHang target = selectById(object.getMaKhachHang());
+		boolean status = false;
+		if(target == null)
+			return false;
+		
+		Connection c = JDBCUtil.connect();
+		try {
+			String sql = "DELETE FROM khachhang WHERE makhachhang=?";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setString(1, object.getMaKhachHang());
+			int result = pst.executeUpdate();
+			JDBCUtil.disconnect(c);
+			if(result > 0) {
+				status = true;
+				System.out.println("Delete successfully");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
+
+	
+	@Override
+	public boolean deleteAll(ArrayList<KhachHang> object) {
+		int dem = 0;
+		for(KhachHang kh : object) {
+			delete(kh);
+			++dem;
+		}
+		if(dem == object.size()) {
+			System.out.println("Delete all successfully");
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean update(KhachHang object) {
+		KhachHang target = selectById(object.getMaKhachHang());
+		if(target == null)
+			return false;
+		
+		boolean status = false;
+		Connection c = JDBCUtil.connect();
+		try {
+			String sql = "UPDATE khachhang SET tendangnhap=?,matkhau=?,hoten=?,diachi=?,diachimuahang=?,diachinhanhang=?,ngaysinh=?,sodienthoai=?,email=?,gioitinh=?,nhanbantin=? WHERE makhachhang=?";
+			PreparedStatement pst = c.prepareStatement(sql);
+			
+			
+			pst.setString(1, object.getTenDangNhap());
+			pst.setString(2, object.getMatKhau());
+			pst.setString(3, object.getHoTen());
+			pst.setString(4, object.getDiaChi());
+			pst.setString(5, object.getDiaChiMuaHang());
+			pst.setString(6, object.getDiaChiNhanHang());
+			pst.setDate(7, object.getNgaySinh());
+			pst.setString(8, object.getSoDienThoai());
+			pst.setString(9, object.getEmail());
+			pst.setString(10,object.getGioiTinh());
+			if(object.isNhanBanTin()==true) {
+				pst.setInt(11, 1);
+			}
+			else {
+				pst.setInt(11, 0);
+			}
+			
+			pst.setString(12, object.getMaKhachHang());
+			
+			int result = pst.executeUpdate();
+			JDBCUtil.disconnect(c);
+			
+			if(result > 0) {
+				status = true;
+				System.out.println("Update successfully");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return status;
+
+	}
+	
+	
+	public boolean containUser(String username) {
+		String target = null;
+		boolean result = false;
+		Connection c = JDBCUtil.connect();
+		try {
+			String sql = "SELECT tendangnhap FROM khachhang WHERE tendangnhap=?";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setString(1, username);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				target = rs.getString("tendangnhap");
+			}
+			if(target != null) {
+				result = true;
+			}	
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	
+	public KhachHang validateUser(String username, String password) {
+		KhachHang target = null;
+		Connection c = JDBCUtil.connect();
+		try {
+			String sql = "SELECT * FROM khachhang WHERE tendangnhap=? AND matkhau=?";
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setString(1, username);
+			pst.setString(2, password);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				
+				String maKhachHang = rs.getString("makhachhang");
+				String tenDangNhap = rs.getString("tendangnhap");
+				String matKhau = rs.getString("matkhau");
+				String hoTen = rs.getString("hoten");
+				String diaChi = rs.getString("diachi");
+				String diaChiMuaHang = rs.getString("diachimuahang");
+				String diaChiNhanHang = rs.getString("diachinhanhang");
+				Date ngaySinh = rs.getDate("ngaysinh");
+				String soDienThoai = rs.getString("sodienthoai");
+				String email = rs.getString("email");
+				String gioiTinh = rs.getString("gioitinh");
+				int nhan = rs.getInt("nhanbantin");
+				
+				boolean nhanBanTin = false;
+				if(nhan == 1) {
+					nhanBanTin = true;
+				}
+				
+				String maXacThuc = rs.getString("maxacthuc");
+				Date thoiGianHieuLuc = rs.getDate("thoigianhieuluc");
+				int trangThaiXacThuc = rs.getInt("trangthaixacthuc");
+				
+				target = new KhachHang(maKhachHang, tenDangNhap, matKhau, hoTen, diaChi, diaChiMuaHang, diaChiNhanHang, ngaySinh, soDienThoai,email, gioiTinh, nhanBanTin,maXacThuc,thoiGianHieuLuc,trangThaiXacThuc);
+				
+				
+			}
+			JDBCUtil.disconnect(c);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return target;
+	}
+	
+	public boolean addVerifyInformation(KhachHang kh) {
+		KhachHang target = selectById(kh.getMaKhachHang());
+		if(target == null)
+			return false;
+		
+		boolean status = false;
+		Connection c = JDBCUtil.connect();
+		try {
+			String sql = "UPDATE khachhang SET maxacthuc=?,thoigianhieuluc=?,trangthaixacthuc=? WHERE makhachhang=?";
+			PreparedStatement pst = c.prepareStatement(sql);
+			
+			
+			pst.setString(1, kh.getMaXacThuc());
+			pst.setDate(2, kh.getThoiGianHieuLuc());
+			pst.setInt(3, kh.getTrangThaiXacThuc());
+			pst.setString(4, kh.getMaKhachHang());
+			
+			int result = pst.executeUpdate();
+			JDBCUtil.disconnect(c);
+			
+			if(result > 0) {
+				status = true;
+				System.out.println("Update successfully");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return status;
+	}
+	
+	
+}
